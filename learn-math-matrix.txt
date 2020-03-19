@@ -1,0 +1,151 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}%用于矩阵
+%   矩阵环境中，用 &分割列，用\\分割行
+
+%自定义符号  "\adots",表示左向右上倾斜的三点
+\newcommand{\adots}{\mathinner{
+    \mkern2mu\raisebox{0.1em}{.}
+    \mkern2mu\raisebox{0.4em}{.}
+    \mkern2mu\raisebox{0.7em}{.}\mkern1mu}
+}
+
+\begin{document}
+    \[
+    \begin{matrix}%没有括号
+        1 & 0 \\
+        0 & 1  
+    \end{matrix}   \qquad%表示加个空格
+    \begin{pmatrix}%中括号
+        1 & 0 \\
+        0 & 1  
+    \end{pmatrix}   \qquad%表示加个空格
+    \begin{bmatrix}%小括号
+        1 & 0 \\
+        0 & 1  
+    \end{bmatrix}   \qquad%表示加个空格
+    \begin{Bmatrix}%大括号
+        1 & 0 \\
+        0 & 1  
+    \end{Bmatrix}   \qquad%表示加个空格
+    \begin{vmatrix}%单竖线
+        1 & 0 \\
+        0 & 1  
+    \end{vmatrix}  \qquad%表示加个空格
+    \begin{Vmatrix}%双竖线
+        1 & 0 \\
+        0 & 1  
+    \end{Vmatrix}
+    \]
+
+    % 使用上下标
+    \[
+     A = \begin{pmatrix}
+        a_{11}^2 & a_{12}^2 &a_{13}^2 \\
+        0 & a_{22} & a_{23} \\
+        0 & 0 & a_{33}   
+     \end{pmatrix} 
+    \]
+
+    %矩阵中常用省略号：\dots(横着三点) 、\vdots(竖着三点)、 \ddots(斜着三点)
+    \[
+    A = \begin{bmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \dots& \dots & \dots & \dots \\
+        a_{n1} & a_{n2} & \dots & a_{nn} \\
+    \end{bmatrix}  \qquad%表示加个空格
+    A = \begin{bmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots& \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn} \\
+    \end{bmatrix}  \qquad%表示加个空格
+    A = \begin{bmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+        a_{21} & a_{22} & \dots & a_{2n} \\
+        \vdots& \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \dots & a_{nn} \\
+    \end{bmatrix}_{n \times n}% "_{n \times n}"用于表示矩阵的行列下标
+    \]
+
+    %分块矩阵(嵌套矩阵)
+    \[
+    \begin{pmatrix}
+    \begin{bmatrix} 1 & 0 \\ 0 &1 \end{bmatrix}
+    & \textbf{\Large 0} \\
+    \textbf{\Large 0} &
+    \begin{bmatrix} 1 & 0 \\ 0 &1 \end{bmatrix}
+    \end{pmatrix}
+    %三角矩阵
+    \begin{pmatrix}
+        a_{11} & a_{12} & \dots & a_{1n} \\
+               & a_{22} & \dots & a_{2n} \\
+        &  & \ddots & \vdots \\
+        \multicolumn{2}{c}{\raisebox{1.3ex}[0pt]{\Huge 0}}%raisebox用来调整高度
+         &  & a_{nn} \\
+    \end{pmatrix}
+    \]
+
+    % 跨列的省略号：\hdotsfor{列数}
+    \[
+    \begin{pmatrix}
+    1 & \frac {1}{2} & \dots & \frac {1}{n} \\
+    \hdotsfor{4} \\
+    m & \frac {m}{2} & \dots & \frac {m}{n}
+    \end{pmatrix}
+    \]
+
+    %行内小矩阵(samllmatrix)
+    复数 $z = (x,y)$ 也可以用矩阵
+    \begin{math}
+        \left(  %需要手动加入左括号
+        \begin{smallmatrix}
+        x & -y \\
+        y & x
+       \end{smallmatrix}
+        \right)   %需要手动加入右括号
+    \end{math}
+
+    %array 环境（类似于表格环境tabular)
+    \[
+        \begin{array}{r|r}
+            \frac{1}{2} & 0 \\
+            \hline
+            0 & -\frac{a}{b}c  
+        \end{array}
+    \]
+
+    % 用array构造复杂的矩阵
+    \[
+        \begin{array}{c@{\hspace{-5pt}}l}
+            \left(
+                \begin{array}{ccc|ccc}
+                    a & \dots & a & b & \dots & b \\
+                    & \ddots & \vdots & \vdots & \adots \\ % 使用了自定义的\adots
+                    &        & a & b \\ \hline
+                    &        &     & c & \dots & c \\
+                    &        &     & \vdots & & \vdots  \\
+                    \multicolumn{3}{c|}{\raisebox{2ex}[0pt]{\Huge 0}}
+                    & c & \dots & c
+                \end{array}
+            \right)
+            &
+            %第一行第二列  表示竖的括号，下标如下，分别为P,q
+            \begin{array}{l}
+                \left.\rule{0mm}{7mm} \right\}p \\ % "left." 仅表示与"\right\}"配对，什么都不输出
+                \\
+                \left. \rule{0mm}{7mm} \right\}q \\
+            \end{array}
+            \\ [-5pt]
+            %第二行第一列 表示横的大括号，下标为m
+            \begin{array}{cc}
+                % "left." 仅表示与"\right\}"配对，什么都不输出
+                \underbrace{\rule{17mm}{0mm} }_m &
+                \underbrace{\rule{17mm}{0mm} }_m
+            \end{array}
+        \end{array}
+    \]
+ 
+\end{document}
+    
